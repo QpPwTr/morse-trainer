@@ -151,36 +151,6 @@
         nextQuestion();   // モード切替時に問題を更新
       });
     });
-
-/*<!--
-  function nextQuestion() {
-  clearAnswer();
-
-  if (currentMode === "morse") {
-    // これまでの「英字 → モールス出題」ロジック
-    current = getRandomMorse();
-    showMorse(current.morse);
-  } else {
-    // kanaPairs からランダムに1つ選ぶ
-    current = kanaPairs[Math.floor(Math.random() * kanaPairs.length)];
-    showKana(current.kana);
-  }
-}
-
-function showAnswer() {
-  if (!current) return;
-
-  if (currentMode === "morse") {
-    answerElem.textContent = current.char;
-  } else {
-    answerElem.textContent = current.alpha;
-  }
-}
-
-    -->*/
-      
-
-
     
     const morseTable = {
       A: ".-",    B: "-...",  C: "-.-.",  D: "-..",   E: ".",
@@ -240,7 +210,14 @@ function showAnswer() {
   "ン": ".-.-."  // n
 };
 
+();
 
+  /*
+  if (currentMode === "morse") { //英字を考える問題
+    
+  } else { //カタカナを考える問題
+    
+  */
 
     const letters = Object.keys(morseTable);
     let currentLetter = null;
