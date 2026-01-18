@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>モールス符号トレーニング</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+
+    .description {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #444;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    #morse {
+      font-size: 52px;
+      letter-spacing: 10px;
+      margin: 40px 0 20px;
+      font-weight: 500;
+    }
+
+    #answer {
+      font-size: 72px;
+      height: 90px;
+      margin-bottom: 40px;
+      color: #2c3e50;
+    }
+
+    .buttons {
+      margin-bottom: 40px;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 12px 22px;
+      margin: 0 8px;
+      border-radius: 6px;
+      border: none;
+      background: #3b82f6;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #666;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>モールス符号トレーニング</h1>
+
+    <div class="description">
+      表示されるモールス符号がA〜Zのどれになるか考えてください。<br>
+      答えが決まったら「答え」ボタンを押して正解を確認してください。
+    </div>
+
+    <div id="morse">－・－・</div>
+    <div id="answer">？</div>
+
+    <div class="buttons">
+      <button id="showBtn">答え</button>
+      <button id="nextBtn">次へ</button>
+    </div>
+
+    <div class="note">
+      ※ 今は英字の問題だけですが、ひらがなとの切り替えが出来るアップデートを予定しています。
+    </div>
+  </div>
+
+  <script>
+    const morseTable = {
+      A: ".-",    B: "-...",  C: "-.-.",  D: "-..",   E: ".",
+      F: "..-.",  G: "--.",   H: "....",  I: "..",    J: ".---",
+      K: "-.-",   L: ".-..",  M: "--",    N: "-.",    O: "---",
+      P: ".--.",  Q: "--.-",  R: ".-.",   S: "...",   T: "-",
+      U: "..-",   V: "...-",  W: ".--",   X: "-..-",  Y: "-.--",
+      Z: "--.."
+    };
+
+    const letters = Object.keys(morseTable);
+    let currentLetter = null;
+
+    function toFullWidth(morse) {
+      return morse
+        .replace(/\./g, "・")
+        .replace(/-/g, "－");
+    }
+
+    function nextQuestion() {
+      const i = Math.floor(Math.random() * letters.length);
+      currentLetter = letters[i];
+
+      const morse = morseTable[currentLetter];
+      document.getElementById("morse").textContent = toFullWidth(morse);
+      document.getElementById("answer").textContent = "？";
+    }
+
+    function showAnswer() {
+      if (currentLetter) {
+        document.getElementById("answer").textContent = currentLetter;
+      }
+    }
+
+    document.getElementById("nextBtn").onclick = nextQuestion;
+    document.getElementById("showBtn").onclick = showAnswer;
+
+    // 初期表示
+    nextQuestion();
+  </script>
+</body>
+</html>
