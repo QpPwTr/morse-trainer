@@ -12,9 +12,9 @@
   </script>
   
   <meta charset="UTF-8">
-  <title>モールス信号 練習アプリ｜英字・ひらがな対応</title>
+  <title>モールス信号 練習アプリ</title>
   <meta name="description" content="モールス信号を練習できる無料Webアプリです。A〜Zのモールス符号を見て英字を当てる練習や、カタカナと英字の対応を覚えるトレーニングができます。">
-  <meta name="keywords" content="モールス信号, モールス 練習, モールス 勉強, CW, アマチュア無線, 英字, ひらがな, 学習アプリ">
+  <meta name="keywords" content="モールス信号, モールス 練習, モールス 勉強, CW, アマチュア無線, 英字, ひらがな, カタカナ, 学習アプリ">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
@@ -121,11 +121,11 @@
     <div class="mode-select">
       <label>
         <input type="radio" name="mode" value="morse" checked>
-        モールス → 英字
+        符号 → 英字
       </label>
       <label>
         <input type="radio" name="mode" value="kana">
-        モールス → カタカナ
+        符号 → カタカナ
       </label>
     </div>
     
@@ -194,7 +194,7 @@ function showAnswer() {
     const letters = Object.keys(morseTable);
     let currentLetter = null;
 
-    function toFullWidth(morse) {
+    function toFullWidth(morse) { //全角に置き換え
       return morse
         .replace(/\./g, "・")
         .replace(/-/g, "－");
