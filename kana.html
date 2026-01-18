@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ひらがなと英字の対応</title>
+  <title>カタカナと英字の対応</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -91,13 +91,13 @@
   <div class="container">
     <div class="nav">
       <a href="index.html">符号から考える</a>
-      <a href="kana.html">ひらがなと英字の対応</a>
+      <a href="kana.html">カタカナと英字の対応</a>
     </div>
 
-    <h1>ひらがなと英字の対応</h1>
+    <h1>カタカナと英字の対応</h1>
 
     <div class="description">
-      表示されるひらがなと、同じモールス符号を持つ英字を対応づけて覚えるための練習です。<br>
+      表示されるカタカナと、同じモールス符号を持つ英字を対応づけて覚えるための練習です。<br>
       答えが分かったら「答え」ボタンで確認してください。
     </div>
 
@@ -116,58 +116,57 @@
       <button id="nextBtn">次へ</button>
     </div>
   </div>
-
   <script>
-    // 同じ符号を持つ対応だけを抜粋した例
-const kanaPairs = [
-  { kana: "イ", letter: "A" },
-  { kana: "ウ", letter: "U" },
-  { kana: "カ", letter: "L" },
-  { kana: "ク", letter: "V" },
-  { kana: "ケ", letter: "Y" },
-  { kana: "タ", letter: "N" },
-  { kana: "チ", letter: "F" },
-  { kana: "ツ", letter: "P" },
-  { kana: "ナ", letter: "R" },
-  { kana: "ニ", letter: "C" },
-  { kana: "ヌ", letter: "H" },
-  { kana: "ネ", letter: "Q" },
-  { kana: "ハ", letter: "B" },
-  { kana: "フ", letter: "Z" },
-  { kana: "ヘ", letter: "E" },
-  { kana: "ホ", letter: "D" },
-  { kana: "マ", letter: "X" },
-  { kana: "ム", letter: "T" },
-  { kana: "ヤ", letter: "W" },
-  { kana: "ヨ", letter: "M" },
-  { kana: "ラ", letter: "S" },
-  { kana: "リ", letter: "G" },
-  { kana: "レ", letter: "O" },
-  { kana: "ワ", letter: "K" },
-  { kana: "ヲ", letter: "J" }
-];
+  const kanaPairs = [
+    { kana: "イ", letter: "A" },
+    { kana: "ウ", letter: "U" },
+    { kana: "カ", letter: "L" },
+    { kana: "ク", letter: "V" },
+    { kana: "ケ", letter: "Y" },
+    { kana: "タ", letter: "N" },
+    { kana: "チ", letter: "F" },
+    { kana: "ツ", letter: "P" },
+    { kana: "ナ", letter: "R" },
+    { kana: "ニ", letter: "C" },
+    { kana: "ヌ", letter: "H" },
+    { kana: "ネ", letter: "Q" },
+    { kana: "ハ", letter: "B" },
+    { kana: "フ", letter: "Z" },
+    { kana: "ヘ", letter: "E" },
+    { kana: "ホ", letter: "D" },
+    { kana: "マ", letter: "X" },
+    { kana: "ム", letter: "T" },
+    { kana: "ヤ", letter: "W" },
+    { kana: "ヨ", letter: "M" },
+    { kana: "ラ", letter: "S" },
+    { kana: "リ", letter: "G" },
+    { kana: "レ", letter: "O" },
+    { kana: "ワ", letter: "K" },
+    { kana: "ヲ", letter: "J" }
+  ];
 
+  let currentPair = null;
 
-    let current = null;
+  function nextQuestion() {
+    const i = Math.floor(Math.random() * kanaPairs.length);
+    currentPair = kanaPairs[i];
 
-    function nextQuestion() {
-      const i = Math.floor(Math.random() * kanaPairs.length);
-      current = kanaPairs[i];
+    document.getElementById("kana").textContent = currentPair.kana;
+    document.getElementById("answer").textContent = "？";
+  }
 
-      document.getElementById("kana").textContent = current.kana;
-      document.getElementById("answer").textContent = "？";
+  function showAnswer() {
+    if (currentPair) {
+      document.getElementById("answer").textContent = currentPair.letter;
     }
+  }
 
-    function showAnswer() {
-      if (current) {
-        document.getElementById("answer").textContent = current.letter;
-      }
-    }
+  document.getElementById("nextBtn").onclick = nextQuestion;
+  document.getElementById("showBtn").onclick = showAnswer;
 
-    document.getElementById("nextBtn").onclick = nextQuestion;
-    document.getElementById("showBtn").onclick = showAnswer;
+  // 初期表示
+  nextQuestion();
+</script>
 
-    nextQuestion();
-  </script>
 </body>
 </html>
