@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ひらがなとモールス対応</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .nav {
+      margin-bottom: 16px;
+    }
+
+    .nav a {
+      display: inline-block;
+      margin: 0 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #2563eb;
+      background: #e8f0ff;
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .description {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #444;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .row {
+      font-size: 48px;
+      margin: 30px 0;
+    }
+
+    .label {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .value {
+      font-size: 64px;
+      height: 80px;
+      margin-top: 6px;
+    }
+
+    .buttons {
+      margin-top: 30px;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 12px 22px;
+      margin: 0 8px;
+      border-radius: 6px;
+      border: none;
+      background: #3b82f6;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <a href="index.html">英字クイズ</a>
+      <a href="kana.html">ひらがな対応</a>
+    </div>
+
+    <h1>ひらがなとモールス対応</h1>
+
+    <div class="description">
+      表示されるひらがなと、同じモールス符号を持つ英字を対応づけて覚えるための練習です。<br>
+      答えが分かったら「答え」ボタンで確認してください。
+    </div>
+
+    <div class="row">
+      <div class="label">ひらがな</div>
+      <div id="kana" class="value">あ</div>
+    </div>
+
+    <div class="row">
+      <div class="label">対応する英字</div>
+      <div id="answer" class="value">？</div>
+    </div>
+
+    <div class="buttons">
+      <button id="showBtn">答え</button>
+      <button id="nextBtn">次へ</button>
+    </div>
+  </div>
+
+  <script>
+    // 同じ符号を持つ対応だけを抜粋した例
+    const kanaPairs = [
+      { kana: "あ", letter: "A" }, // .-
+      { kana: "い", letter: "I" }, // ..
+      { kana: "う", letter: "U" }, // ..-
+      { kana: "え", letter: "H" }, // ....
+      { kana: "お", letter: "O" }, // ---
+      { kana: "か", letter: "K" }, // -.-
+      { kana: "き", letter: "R" }, // .-.
+      { kana: "く", letter: "Q" }, // --.-
+      { kana: "け", letter: "X" }, // -..-
+      { kana: "こ", letter: "C" }  // -.-.
+    ];
+
+    let current = null;
+
+    function nextQuestion() {
+      const i = Math.floor(Math.random() * kanaPairs.length);
+      current = kanaPairs[i];
+
+      document.getElementById("kana").textContent = current.kana;
+      document.getElementById("answer").textContent = "？";
+    }
+
+    function showAnswer() {
+      if (current) {
+        document.getElementById("answer").textContent = current.letter;
+      }
+    }
+
+    document.getElementById("nextBtn").onclick = nextQuestion;
+    document.getElementById("showBtn").onclick = showAnswer;
+
+    nextQuestion();
+  </script>
+</body>
+</html>
