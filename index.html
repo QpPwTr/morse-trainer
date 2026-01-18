@@ -118,6 +118,17 @@
       答えが決まったら「答え」ボタンを押して正解を確認してください。
     </div>
 
+    <div class="mode-select">
+      <label>
+        <input type="radio" name="mode" value="morse" checked>
+        モールス → 英字
+      </label>
+      <label>
+        <input type="radio" name="mode" value="kana">
+        モールス → カタカナ
+      </label>
+    </div>
+    
     <div id="morse">－・－・</div>
     <div id="answer">？</div>
 
@@ -132,6 +143,45 @@
   </div>
 
   <script>
+
+    let currentMode = "morse"; // "morse" or "kana"
+    document.querySelectorAll('input[name="mode"]').forEach(radio => {
+      radio.addEventListener("change", () => {
+        currentMode = radio.value;
+        nextQuestion();   // モード切替時に問題を更新
+      });
+    });
+
+/*<!--
+  function nextQuestion() {
+  clearAnswer();
+
+  if (currentMode === "morse") {
+    // これまでの「英字 → モールス出題」ロジック
+    current = getRandomMorse();
+    showMorse(current.morse);
+  } else {
+    // kanaPairs からランダムに1つ選ぶ
+    current = kanaPairs[Math.floor(Math.random() * kanaPairs.length)];
+    showKana(current.kana);
+  }
+}
+
+function showAnswer() {
+  if (!current) return;
+
+  if (currentMode === "morse") {
+    answerElem.textContent = current.char;
+  } else {
+    answerElem.textContent = current.alpha;
+  }
+}
+
+    -->*/
+      
+
+
+    
     const morseTable = {
       A: ".-",    B: "-...",  C: "-.-.",  D: "-..",   E: ".",
       F: "..-.",  G: "--.",   H: "....",  I: "..",    J: ".---",
