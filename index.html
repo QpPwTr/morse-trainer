@@ -162,11 +162,11 @@
     };
 
     const katakanaMorse = {
-  "ア": "--.--",    // a のモールス
-  "イ": ".-",    // i
-  "ウ": "..-",   // u
-  "エ": "-.---", // e
-  "オ": ".-...",   // o
+      "ア": "--.--",    // a のモールス
+      "イ": ".-",    // i
+      "ウ": "..-",   // u
+      "エ": "-.---", // e
+      "オ": ".-...",   // o
   "カ": ".-..",  // ka
   "キ": "-.-..", // ki
   "ク": "...-",  // ku
@@ -208,12 +208,7 @@
   "ワ": "-.-",   // wa
   "ヲ": ".---",  // wo
   "ン": ".-.-."  // n
-};
-
-//();
-
-
-  
+  };
 
     function toFullWidth(morse) { //全角に置き換え
       return morse
@@ -221,45 +216,39 @@
         .replace(/-/g, "－");
     }
 
+    const letters = Object.keys(morseTable);
+    const kanaList = Object.keys(katakanaMorse);
 
+    let currentAnswer = null;   // 表示すべき答え（英字 or カタカナ）
+    let currentMorse = null;    // 表示中のモールス
 
+    function nextQuestion() {
+      document.getElementById("answer").textContent = "？";
 
-  const letters = Object.keys(morseTable);
-const kanaList = Object.keys(katakanaMorse);
+      if (currentMode === "morse") { // 符号 → 英字
+        const i = Math.floor(Math.random() * letters.length);
+        const letter = letters[i];
 
-let currentAnswer = null;   // 表示すべき答え（英字 or カタカナ）
-let currentMorse = null;    // 表示中のモールス
+        currentAnswer = letter;
+        currentMorse = morseTable[letter];
 
-function nextQuestion() {
-  document.getElementById("answer").textContent = "？";
+      } else { // 符号 → カタカナ
+        const i = Math.floor(Math.random() * kanaList.length);
+        const kana = kanaList[i];
 
-  if (currentMode === "morse") { // 符号 → 英字
-    const i = Math.floor(Math.random() * letters.length);
-    const letter = letters[i];
+        currentAnswer = kana;
+        currentMorse = katakanaMorse[kana];
+      }
 
-    currentAnswer = letter;
-    currentMorse = morseTable[letter];
+      document.getElementById("morse").textContent = toFullWidth(currentMorse);
+    }
 
-  } else { // 符号 → カタカナ
-    const i = Math.floor(Math.random() * kanaList.length);
-    const kana = kanaList[i];
-
-    currentAnswer = kana;
-    currentMorse = katakanaMorse[kana];
-  }
-
-  document.getElementById("morse").textContent = toFullWidth(currentMorse);
-}
-
-function showAnswer() {
-  if (currentAnswer) {
-    document.getElementById("answer").textContent = currentAnswer;
-  }
-}
-
-
-
-
+    function showAnswer() {
+      if (currentAnswer) {
+        document.getElementById("answer").textContent = currentAnswer;
+      }
+    }
+    
     document.getElementById("nextBtn").onclick = nextQuestion;
     document.getElementById("showBtn").onclick = showAnswer;
 
