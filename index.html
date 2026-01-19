@@ -212,15 +212,8 @@
 
 ();
 
-  /*
-  if (currentMode === "morse") { //英字を考える問題
-    
-  } else { //カタカナを考える問題
-    
-  */
 
-    const letters = Object.keys(morseTable);
-    let currentLetter = null;
+  
 
     function toFullWidth(morse) { //全角に置き換え
       return morse
@@ -228,20 +221,44 @@
         .replace(/-/g, "－");
     }
 
-    function nextQuestion() {
-      const i = Math.floor(Math.random() * letters.length);
-      currentLetter = letters[i];
 
-      const morse = morseTable[currentLetter];
-      document.getElementById("morse").textContent = toFullWidth(morse);
-      document.getElementById("answer").textContent = "？";
-    }
 
-    function showAnswer() {
-      if (currentLetter) {
-        document.getElementById("answer").textContent = currentLetter;
-      }
-    }
+
+  const letters = Object.keys(morseTable);
+const kanaList = Object.keys(katakanaMorse);
+
+let currentAnswer = null;   // 表示すべき答え（英字 or カタカナ）
+let currentMorse = null;    // 表示中のモールス
+
+function nextQuestion() {
+  document.getElementById("answer").textContent = "？";
+
+  if (currentMode === "morse") { // 符号 → 英字
+    const i = Math.floor(Math.random() * letters.length);
+    const letter = letters[i];
+
+    currentAnswer = letter;
+    currentMorse = morseTable[letter];
+
+  } else { // 符号 → カタカナ
+    const i = Math.floor(Math.random() * kanaList.length);
+    const kana = kanaList[i];
+
+    currentAnswer = kana;
+    currentMorse = katakanaMorse[kana];
+  }
+
+  document.getElementById("morse").textContent = toFullWidth(currentMorse);
+}
+
+function showAnswer() {
+  if (currentAnswer) {
+    document.getElementById("answer").textContent = currentAnswer;
+  }
+}
+
+
+
 
     document.getElementById("nextBtn").onclick = nextQuestion;
     document.getElementById("showBtn").onclick = showAnswer;
