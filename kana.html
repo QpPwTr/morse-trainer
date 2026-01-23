@@ -156,7 +156,7 @@
   </div>
   <script>
   const kanaPairs = [
-    { kana: "イ", letter: "A", yomi:アトー},
+    { kana: "イ", letter: "A", yomi:アトー },
     { kana: "ウ", letter: "U", yomi:ウイロー },
     { kana: "カ", letter: "L", yomi:ルルールル },
     { kana: "ク", letter: "V", yomi:ベロシソー },
@@ -169,18 +169,18 @@
     { kana: "ヌ", letter: "H", yomi:ふりかけ },
     { kana: "ネ", letter: "Q", yomi:キューキューシキュー },
     { kana: "ハ", letter: "B", yomi:ボータオシ },
-    { kana: "フ", letter: "Z" },
-    { kana: "ヘ", letter: "E" },
-    { kana: "ホ", letter: "D" },
-    { kana: "マ", letter: "X" },
-    { kana: "ム", letter: "T" },
-    { kana: "ヤ", letter: "W" },
-    { kana: "ヨ", letter: "M" },
-    { kana: "ラ", letter: "S" },
-    { kana: "リ", letter: "G" },
-    { kana: "レ", letter: "O" },
-    { kana: "ワ", letter: "K" },
-    { kana: "ヲ", letter: "J" }
+    { kana: "フ", letter: "Z", yomi:ザーザーアメ },
+    { kana: "ヘ", letter: "E", yomi:えっ },
+    { kana: "ホ", letter: "D", yomi:ドーコク },
+    { kana: "マ", letter: "X", yomi:マークスロー },
+    { kana: "ム", letter: "T", yomi:テー },
+    { kana: "ヤ", letter: "W", yomi:ワクージョー },
+    { kana: "ヨ", letter: "M", yomi:モーモー },
+    { kana: "ラ", letter: "S", yomi:サムダ },
+    { kana: "リ", letter: "G", yomi:ジーバース },
+    { kana: "レ", letter: "O", yomi:オーオーオー },
+    { kana: "ワ", letter: "K", yomi:ケークデー },
+    { kana: "ヲ", letter: "J", yomi:ジョショーオーショー }
   ];
 
   let currentPair = null;
@@ -195,7 +195,7 @@
 
   function showAnswer() {
     if (currentPair) {
-      document.getElementById("answer").textContent = currentPair.letter;
+      document.getElementById("answer").textContent = currentPair.letter+" "+currentPair.yomi;
     }
   }
 
